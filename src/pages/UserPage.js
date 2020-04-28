@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react'
 
 import Users from '../actions/Users';
 
@@ -13,10 +14,18 @@ class UserPage extends React.Component {
     const userArray = Object.values(users);
 
     const userList = (userArray.map((item) =>
-      <li key={item.id}>{item.name}</li>
+      <Card key={item.id}>
+        <Card.Content>
+          <Card.Header>{item.name}</Card.Header>
+          <Card.Meta>{item.email}</Card.Meta>
+          <Card.Description>
+            Company: {item.company.name}
+          </Card.Description>
+        </Card.Content>
+      </Card>
     ));
 
-    return userList;
+    return (<Card.Group>{userList}</Card.Group>);
   }
 
   render() {
@@ -25,8 +34,7 @@ class UserPage extends React.Component {
 
     return (
       <React.Fragment>
-        <div>Users:</div>
-        <div>{userList}</div>
+        {userList}
       </React.Fragment>
     );
   }

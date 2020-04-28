@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { Item } from 'semantic-ui-react'
 
 import Posts from '../actions/Posts';
 
@@ -13,10 +15,17 @@ class PostPage extends React.Component {
     const postArray = Object.values(posts);
 
     const postList = (postArray.map((item) =>
-      <li key={item.id}>{item.title}</li>
+      <StyledItem key={item.id}>
+        <Item.Content>
+          <Item.Header>{item.title}</Item.Header>
+          <Item.Description>
+            {item.body}
+          </Item.Description>
+        </Item.Content>
+      </StyledItem>
     ));
 
-    return postList;
+    return (<Item.Group>{postList}</Item.Group>);
   }
 
   render() {
@@ -25,8 +34,7 @@ class PostPage extends React.Component {
 
     return (
       <React.Fragment>
-        <div>Posts:</div>
-        <div>{postList}</div>
+        {postList}
       </React.Fragment>
     );
   }
@@ -42,3 +50,9 @@ export default connect(
     getPosts: Posts.getAllPosts
   }
 )(PostPage);
+
+const StyledItem = styled(Item)`
+  border: 1px solid #d4d4d5 !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+`
