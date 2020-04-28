@@ -1,11 +1,11 @@
-function rootReducer(state = [], action) {
-    switch (action.type) {
-      case 'INITIAL_DATA':
-        return {...state};
-      default:
-        return state;
-    }
-  }
+import { combineReducers } from 'redux';
 
-  export default rootReducer;
-  
+import posts from './posts';
+import users from './users';
+
+const rootReducer = combineReducers({
+  posts,
+  users,
+});
+
+export default rootReducer;

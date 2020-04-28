@@ -1,14 +1,14 @@
 import App from './App.js';
-import PageOne from './pages/PageOne';
-import PageTwo from './pages/PageTwo';
+import UserPage from './pages/UserPage';
+import PostPage from './pages/PostPage';
 
 export default [{
     component: App,
     routes: [{
-        path: '/page-1',
-        component: PageOne,
+        path: '/users',
+        component: UserPage,
     }, {
-        path: '/page-2',
-        component: PageTwo, 
+        path: '/posts',
+        component: PostPage, 
     }]
 }];
