@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react'
 
 import Users from '../actions/Users';
+import Loader from '../components/Loader';
 
 class UserPage extends React.Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class UserPage extends React.Component {
 
   render() {
     const { users } = this.props;
-    const userList = (users != null) ? this.renderUsers() : '';
+    const userList = (users != null) ? this.renderUsers() : <Loader />;
 
     return (
       <React.Fragment>

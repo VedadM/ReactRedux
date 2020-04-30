@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Item } from 'semantic-ui-react'
 
 import Posts from '../actions/Posts';
+import Loader from '../components/Loader';
 
 class PostPage extends React.Component {
   componentDidMount() {
@@ -30,8 +31,7 @@ class PostPage extends React.Component {
 
   render() {
     const { posts } = this.props;
-    const postList = (posts != null) ? this.renderPosts() : '';
-
+    const postList = (posts != null) ? this.renderPosts() : <Loader />;
     return (
       <React.Fragment>
         {postList}
