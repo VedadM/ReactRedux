@@ -7,6 +7,7 @@ function App(props) {
   return (
     <Container>
       <NavBar>
+        <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/users">Users</StyledLink>
         <StyledLink to="/posts">Posts</StyledLink>
       </NavBar>
