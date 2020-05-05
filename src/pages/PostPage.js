@@ -8,26 +8,38 @@ import SpecificUserPosts from '../components/SpecificUserPosts';
 
 class PostPage extends React.Component {
   state = {
-    getSpecificPosts: false
+    getSpecificPosts: false,
+    page: null
   };
 
   componentDidMount() {
-    if (this.props.match.params.userid === undefined) {
-      this.setState({
-        getSpecificPosts: true
-      })
+    this.props.getUsers();
+
+    this.setState({
+      page: this.props.match.params.userid
+    })
+  }
+
+  checkUrlParameter = () => {
+    const { page } = this.state;
+    const { userIds } = this.props;
+
+    if (userIds.includes(Number(page))) {
+      return <SpecificUserPosts />
     }
+
+    return <AllPosts /> 
   }
 
   render() {
-    const { getSpecificPosts } = this.state;
-    const postComponent = (getSpecificPosts) ? <AllPosts /> : <SpecificUserPosts />;
+    const postComponent = this.checkUrlParameter();
+
     return (
       <React.Fragment>
         {postComponent}
       </React.Fragment>
     );
-  }
+  } 
 }
 
 const mapStateToProps = state => {
