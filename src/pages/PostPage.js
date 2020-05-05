@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Item } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react';
 
 import Posts from '../actions/Posts';
+import Users from '../actions/Users';
 import Loader from '../components/Loader';
 
 class PostPage extends React.Component {
   componentDidMount() {
+    console.log(this.props.match.params.userid);
+    console.log(this.props.userIds);
     this.props.getPosts();
   }
 
@@ -41,13 +44,17 @@ class PostPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts.posts };
+  return {
+    posts: state.posts.posts,
+    userIds: state.users.userIds,
+  };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getPosts: Posts.getAllPosts
+    getPosts: Posts.getAllPosts,
+    getUsers: Users.getAllUsers
   }
 )(PostPage);
 

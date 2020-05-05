@@ -1,5 +1,6 @@
 const initialState = {
   users: null,
+  userIds: [],
   error: null,
 };
 
@@ -8,7 +9,8 @@ function users(state = initialState, action) {
     case 'ALL_USERS':
       return {
         ...state,
-        users:  { ...action.payload }
+        users:  { ...action.payload },
+        userIds: [...action.payload.map(item => (item.id))]
       };
     case 'GET_USERS_ERROR':
       return {

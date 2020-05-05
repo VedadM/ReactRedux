@@ -10,15 +10,15 @@ export default [{
     routes: [{
         path: '/',
         component: Home,
-        exact: true
+        exact: true,
     },{
         path: '/users',
         component: UserPage,
-        exact: true
+        exact: true,
     }, {
-        path: '/posts',
+        path: '/posts/:userid?',
         component: PostPage,
-        exact: true
+        exact: false,
     }, {
         component: NotFound, 
     }]
