@@ -1,43 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Item } from 'semantic-ui-react';
 
-import Posts from '../actions/Posts';
 import Users from '../actions/Users';
-import Loader from '../components/Loader';
+
+import AllPosts from '../components/AllPosts';
+import SpecificUserPosts from '../components/SpecificUserPosts';
 
 class PostPage extends React.Component {
+  state = {
+    getSpecificPosts: false
+  };
+
   componentDidMount() {
-    console.log(this.props.match.params.userid);
-    console.log(this.props.userIds);
-    this.props.getPosts();
-  }
-
-  renderPosts = () => {
-    const { posts } = this.props;
-    const postArray = Object.values(posts);
-
-    const postList = (postArray.map((item) =>
-      <StyledItem key={item.id}>
-        <Item.Content>
-          <Item.Header>{item.title}</Item.Header>
-          <Item.Description>
-            {item.body}
-          </Item.Description>
-        </Item.Content>
-      </StyledItem>
-    ));
-
-    return (<Item.Group>{postList}</Item.Group>);
+    if (this.props.match.params.userid === undefined) {
+      this.setState({
+        getSpecificPosts: true
+      })
+    }
   }
 
   render() {
-    const { posts } = this.props;
-    const postList = (posts != null) ? this.renderPosts() : <Loader />;
+    const { getSpecificPosts } = this.state;
+    const postComponent = (getSpecificPosts) ? <AllPosts /> : <SpecificUserPosts />;
     return (
       <React.Fragment>
-        {postList}
+        {postComponent}
       </React.Fragment>
     );
   }
@@ -45,7 +32,6 @@ class PostPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts.posts,
     userIds: state.users.userIds,
   };
 };
@@ -53,13 +39,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getPosts: Posts.getAllPosts,
     getUsers: Users.getAllUsers
   }
 )(PostPage);
-
-const StyledItem = styled(Item)`
-  border: 1px solid #d4d4d5 !important;
-  padding: 10px !important;
-  border-radius: 5px !important;
-`
