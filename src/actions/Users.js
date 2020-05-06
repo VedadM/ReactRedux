@@ -3,6 +3,10 @@ class Users {
 
   static GET_USERS_ERROR = 'GET_USERS_ERROR';
 
+  static GET_ONE_USER = 'GET_ONE_USER';
+
+  static GET_ONE_USER_ERROR = 'GET_ONE_USER_ERROR';
+
   static getAllUsers = () => async (
     dispatch,
     getState,
@@ -27,6 +31,35 @@ class Users {
       payload: res.data
     });
   };
+
+  static getOneUser = (id) => async (
+    dispatch,
+    getState,
+    axios,
+  ) => {
+    let res = {};
+
+    console.log("here", id);
+
+    try {
+      res = await axios({
+        method: 'get',
+        url: '/users/' + id
+      })
+    } catch (e) {
+      dispatch({
+        type: Users.GET_ONE_USER_ERROR,
+      });
+      return;
+    }
+
+    console.log(res.data)
+
+    dispatch({
+      type: Users.GET_ONE_USER,
+      payload: res.data
+    });
+  }
 }
 
 export default Users;

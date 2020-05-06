@@ -2,14 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { renderRoutes } from 'react-router-config';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function App(props) {
+  const history = useHistory();
+
+  function refreshPage() {
+    history.push('/posts');
+    window.location.reload(false);
+  }
+
   return (
     <Container>
       <NavBar>
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/users">Users</StyledLink>
-        <StyledLink to="/posts">Posts</StyledLink>
+        <StyledLink to="/posts" onClick={refreshPage}>Posts</StyledLink>
       </NavBar>
       { renderRoutes(props.route.routes) }
     </Container>

@@ -13,10 +13,12 @@ class PostPage extends React.Component {
   };
 
   componentDidMount() {
+    const { userid } = this.props.match.params;
+
     this.props.getUsers();
 
     this.setState({
-      page: this.props.match.params.userid
+      page: userid
     })
   }
 
@@ -25,7 +27,7 @@ class PostPage extends React.Component {
     const { userIds } = this.props;
 
     if (userIds.includes(Number(page))) {
-      return <SpecificUserPosts />
+      return <SpecificUserPosts id={page} />
     }
 
     return <AllPosts /> 

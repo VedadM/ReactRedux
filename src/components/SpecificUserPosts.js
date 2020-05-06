@@ -1,11 +1,65 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react'
+
+import Users from '../actions/Users';
+
+import Loader from '../components/Loader';
 
 class SpecificUserPosts extends React.Component {
-  render() {
+  state = {
+    currentId: null
+  }
+  
+  componentDidMount() {
+    const { id } = this.props;
+    console.log(id)
+    this.props.getOneUser(Number(id));
+
+    this.setState({
+      currentId: id,
+    })
+  }
+
+  setUserInfo = () => {
+    const { selectedUser } = this.props;
+
     return (
-      <div>For Specific User Posts</div>
+      <Card>
+        <Card.Content>
+          <Card.Header>{selectedUser.name}</Card.Header>
+          <Card.Meta>
+            <span>{selectedUser.username}</span>
+          </Card.Meta>
+          <Card.Description>
+            {selectedUser.email}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+
+        </Card.Content>
+      </Card>
+    );
+  }
+
+  render() {
+    const { selectedUser } = this.props;
+
+    let userInfo = (selectedUser) ? this.setUserInfo() : <Loader />
+
+    return (
+      <div>{ userInfo }</div>
     );
   }
 }
 
-export default SpecificUserPosts
+const mapStateToProps = state => {
+  return { selectedUser: state.users.selectedUser };
+};
+
+export default connect(  
+  mapStateToProps,
+  {
+    getOneUser: Users.getOneUser
+  }
+  )(SpecificUserPosts);

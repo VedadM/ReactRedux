@@ -1,7 +1,9 @@
 const initialState = {
   users: null,
   userIds: [],
-  error: null,
+  errorUsers: false,
+  selectedUser: null,
+  errorUser: false,
 };
 
 function users(state = initialState, action) {
@@ -15,7 +17,17 @@ function users(state = initialState, action) {
     case 'GET_USERS_ERROR':
       return {
         ...state,
-        error: true,
+        errorUsers: true,
+      }
+    case 'GET_ONE_USER':
+      return {
+        ...state,
+        selectedUser: { ...action.payload },
+      }
+    case 'GET_ONE_USER_ERROR':
+      return {
+        ...state,
+        errorUser: true,
       }
     default:
       return state;

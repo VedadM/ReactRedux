@@ -60,5 +60,4 @@ export default connect(
 const StyledItem = styled(Item)`
   border: 1px solid #d4d4d5 !important;
   padding: 10px !important;
-  border-radius: 5px !important;
-`
+  border-radius: 5px !important;`
