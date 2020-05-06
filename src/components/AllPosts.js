@@ -35,7 +35,8 @@ class PostPage extends React.Component {
 
   render() {
     const { posts } = this.props;
-    const postList = (posts != null) ? this.renderPosts() : <Loader />;
+    const postList = (posts !== null) ? this.renderPosts() : <Loader />;
+
     return (
       <React.Fragment>
         {postList}

@@ -39,8 +39,6 @@ class Users {
   ) => {
     let res = {};
 
-    console.log("here", id);
-
     try {
       res = await axios({
         method: 'get',
@@ -52,8 +50,6 @@ class Users {
       });
       return;
     }
-
-    console.log(res.data)
 
     dispatch({
       type: Users.GET_ONE_USER,

@@ -13,7 +13,7 @@ class SpecificUserPosts extends React.Component {
   
   componentDidMount() {
     const { id } = this.props;
-    console.log(id)
+
     this.props.getOneUser(Number(id));
 
     this.setState({

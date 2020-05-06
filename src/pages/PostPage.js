@@ -5,6 +5,7 @@ import Users from '../actions/Users';
 
 import AllPosts from '../components/AllPosts';
 import SpecificUserPosts from '../components/SpecificUserPosts';
+import Loader from '../components/Loader';
 
 class PostPage extends React.Component {
   state = {
@@ -30,7 +31,11 @@ class PostPage extends React.Component {
       return <SpecificUserPosts id={page} />
     }
 
-    return <AllPosts /> 
+    if ((!page && !userIds.includes(Number(page))) || userIds === undefined) {
+      return <AllPosts /> 
+    }
+
+    return <Loader /> 
   }
 
   render() {
@@ -41,7 +46,7 @@ class PostPage extends React.Component {
         {postComponent}
       </React.Fragment>
     );
-  } 
+  }
 }
 
 const mapStateToProps = state => {
