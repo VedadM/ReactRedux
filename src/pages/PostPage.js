@@ -5,7 +5,7 @@ import Users from '../actions/Users';
 
 import AllPosts from '../components/AllPosts';
 import SpecificUserPosts from '../components/SpecificUserPosts';
-import Loader from '../components/Loader';
+import NotFound from '../pages/NotFound';
 
 class PostPage extends React.Component {
   state = {
@@ -31,11 +31,11 @@ class PostPage extends React.Component {
       return <SpecificUserPosts id={page} />
     }
 
-    if ((!page && !userIds.includes(Number(page))) || userIds === undefined) {
+    if ((!page && !userIds.includes(Number(page))) || !userIds.includes(Number(page)) || userIds === undefined) {
       return <AllPosts /> 
     }
 
-    return <Loader /> 
+    return <NotFound /> 
   }
 
   render() {
