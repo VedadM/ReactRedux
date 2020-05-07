@@ -12,11 +12,11 @@ export default [{
         component: Home,
         exact: true,
     },{
-        path: '/users',
+        path: '/users/:userid?',
         component: UserPage,
         exact: true,
     }, {
-        path: '/posts/:userid?',
+        path: '/Posts/',
         component: PostPage,
         exact: false,
     }, {

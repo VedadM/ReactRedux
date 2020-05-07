@@ -8,7 +8,7 @@ function App(props) {
   const history = useHistory();
 
   function refreshPage() {
-    history.push('/posts');
+    history.push('/users');
     window.location.reload(false);
   }
 
@@ -16,8 +16,8 @@ function App(props) {
     <Container>
       <NavBar>
         <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/users">Users</StyledLink>
-        <StyledLink to="/posts" onClick={refreshPage}>Posts</StyledLink>
+        <StyledLink to="/users" onClick={refreshPage}>Users</StyledLink>
+        <StyledLink to="/posts">Posts</StyledLink>
       </NavBar>
       { renderRoutes(props.route.routes) }
     </Container>
