@@ -7,9 +7,6 @@ import Users from '../actions/Users';
 import Loader from '../components/Loader';
 
 class UserPage extends React.Component {
-  state = {
-    currentPage: null
-  };
 
   componentDidMount() {
     this.props.getUsers();

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { renderRoutes } from 'react-router-config';
-import { Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 function App(props) {
@@ -19,9 +19,7 @@ function App(props) {
         <StyledLink to="/users" onClick={refreshPage}>Users</StyledLink>
         <StyledLink to="/posts">Posts</StyledLink>
       </NavBar>
-      <Switch>
-        { renderRoutes(props.route.routes) }
-      </Switch>
+      { renderRoutes(props.route.routes) }
     </Container>
   );
 }
