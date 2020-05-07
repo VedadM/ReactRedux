@@ -1,14 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';  
 
 import Users from '../actions/Users';
 import Loader from '../components/Loader';
 
 class UserPage extends React.Component {
+  state = {
+    currentPage: null
+  };
+
   componentDidMount() {
     this.props.getUsers();
+  }
+
+  refreshredirectPage = (id) => {
+    this.props.history.push(`/users/${id}`);
+    window.location.reload(false);
   }
 
   renderUsers = () => {
@@ -18,7 +27,13 @@ class UserPage extends React.Component {
     const userList = (userArray.map((item) =>
       <Card key={ item.id }>
         <Card.Content>
-          <Card.Header><Link to={`/users/${item.id}`}>{item.name}</Link></Card.Header>
+          <Card.Header>
+            <Link 
+              to={`/users/${item.id}`}
+              onClick={() => this.refreshredirectPage(item.id)}>
+                {item.name}
+            </Link>
+          </Card.Header>
           <Card.Meta>{item.email}</Card.Meta>
           <Card.Description>
             Company: {item.company.name}

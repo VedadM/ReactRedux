@@ -14,7 +14,7 @@ export default [{
     },{
         path: '/users/:userid?',
         component: UserPage,
-        exact: false,
+        exact: true,
     }, {
         path: '/Posts/',
         component: PostPage,
