@@ -14,11 +14,11 @@ export default [{
     },{
         path: '/users/:userid?',
         component: UserPage,
-        exact: true,
+        exact: false,
     }, {
         path: '/Posts/',
         component: PostPage,
-        exact: false,
+        exact: true,
     }, {
         component: NotFound, 
     }]

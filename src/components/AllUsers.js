@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import Users from '../actions/Users';
 import Loader from '../components/Loader';
@@ -16,9 +16,9 @@ class UserPage extends React.Component {
     const userArray = Object.values(users);
 
     const userList = (userArray.map((item) =>
-      <Card>
+      <Card key={ item.id }>
         <Card.Content>
-          <Card.Header>{item.name}</Card.Header>
+          <Card.Header><Link to={`/users/${item.id}`}>{item.name}</Link></Card.Header>
           <Card.Meta>{item.email}</Card.Meta>
           <Card.Description>
             Company: {item.company.name}
@@ -48,9 +48,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     getUsers: Users.getAllUsers,
   }
-)(UserPage);
+)(UserPage));
